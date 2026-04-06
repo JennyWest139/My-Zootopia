@@ -48,6 +48,29 @@ h1 {
     box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.35);
 }
 
+
+/* Unknown skin types: visibly de-emphasized but still readable */
+.cards__item.unknown-skin {
+    background-color: #f3f3f3;
+    border: 1px dashed rgba(0, 0, 0, 0.18);
+    opacity: 0.82;
+}
+
+/* Title slightly muted */
+.cards__item.unknown-skin .card__title {
+    color: #888;
+}
+
+/* Optional: reduce hover “zoom” for unknown cards */
+.cards__item.unknown-skin:hover {
+    transform: scale(1.02);
+}
+
+.skin-unknown {
+    color: #8b2f3c; /* Weinrot */
+    font-weight: 700; /* fett */
+}
+
 /* ---------- Titel ---------- */
 .card__title {
     color: var(--gray-dark);
