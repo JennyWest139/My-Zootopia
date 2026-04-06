@@ -1,0 +1,88 @@
+/* ---------- Farbvariablen ---------- */
+:root {
+    --gray-darker: #444444;
+    --gray-dark: #696969;
+    --gray-light: #cccccc;
+}
+
+/* ---------- Grundlayout ---------- */
+html {
+    background-color: #ffe9e9;
+}
+
+body {
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    padding: 1rem;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* ---------- Überschrift ---------- */
+h1 {
+    text-align: center;
+    font-size: 40pt;
+    font-weight: normal;
+    margin-bottom: 2rem;
+}
+
+/* ---------- Karten ---------- */
+.cards {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cards__item {
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    padding: 1.25rem;
+    margin: 2.5rem 0;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cards__item:hover {
+    transform: scale(1.1); /* ✅ +20 % */
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Titel ---------- */
+.card__title {
+    color: var(--gray-dark);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem; /* ✅ mehr Abstand zwischen Name und Diet */
+}
+
+/* ---------- Textbereich ---------- */
+.card__text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+/* ---------- Detail-Liste ---------- */
+.animal__details {
+    list-style-position: outside;
+    padding-left: 1.2rem;
+    margin: 0;
+}
+
+/* einzelne Zeilen */
+.animal__details li {
+    padding: 0.3rem 0;
+}
+
+/* ---------- Sonne als Aufzählungszeichen ---------- */
+.animal__details li::marker {
+    content: "☀️ ";
+}
+
+/* ---------- Labels ---------- */
+.animal__details strong {
+    font-weight: 600;
+    color: var(--gray-darker);
+}

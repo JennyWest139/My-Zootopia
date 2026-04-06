@@ -20,27 +20,67 @@ def write_html_file(file_path, content):
         return None
 
 
+# def serialize_animal(animal_obj):
+#     output = ""
+#     name = animal_obj.get("name", "Unknown")  # name is compulsory
+#     characteristics = animal_obj.get("characteristics", {})
+#     locations = animal_obj.get("locations", [])
+#     lifespan = animal_obj.get("lifespan", "Unknown")
+#
+#     output += f'<li class="cards__item">\n'
+#     output += f'<div class="card__title">{name.title()}</div>\n'  # .title() here for unity, but built for m -> Mammal
+#     output += f'<p class="card__text">\n'
+#     if "diet" in characteristics:
+#         output += f'<strong>Diet:</strong> {characteristics["diet"].title()}<br/>\n'
+#     if locations:
+#         output += f"<strong>Location:</strong> {locations[0].title()}<br/>\n"
+#     if "type" in characteristics:
+#         output += f'<strong>Type:</strong> {characteristics["type"].title()}<br/>\n'
+#     if "lifespan" in characteristics:
+#         output += f'<strong>Lifespan:</strong> {characteristics["lifespan"]}<br/>\n'  # deliberately no .title()
+#
+#     output += f"</p>\n"
+#     output += f"</li>\n"
+#
+#     return output
+
+
 def serialize_animal(animal_obj):
     output = ""
-    name = animal_obj.get("name", "Unknown")  # name is compulsory
+
+    name = animal_obj.get("name", "Unknown")
     characteristics = animal_obj.get("characteristics", {})
     locations = animal_obj.get("locations", [])
-    lifespan = animal_obj.get("lifespan", "Unknown")
+    lifespan = animal_obj.get("lifespan")
 
-    output += f'<li class="cards__item">\n'
-    output += f'<div class="card__title">{name.title()}</div>\n'  # .title() here for unity, but built for m -> Mammal
-    output += f'<p class="card__text">\n'
+    output += '<li class="cards__item">\n'
+    output += f'  <div class="card__title">{name.title()}</div>\n'
+    output += '  <div class="card__text">\n'
+    output += '    <ul class="animal__details">\n'
+
     if "diet" in characteristics:
-        output += f'<strong>Diet:</strong> {characteristics["diet"].title()}<br/>\n'
-    if locations:
-        output += f"<strong>Location:</strong> {locations[0].title()}<br/>\n"
-    if "type" in characteristics:
-        output += f'<strong>Type:</strong> {characteristics["type"].title()}<br/>\n'
-    if "lifespan" in characteristics:
-        output += f'<strong>Lifespan:</strong> {characteristics["lifespan"]}<br/>\n'  # deliberately no .title()
+        output += (
+            f"      <li><strong>Diet:</strong> "
+            f'{characteristics["diet"].title()}</li>\n'
+        )
 
-    output += f"</p>\n"
-    output += f"</li>\n"
+    if locations:
+        output += (
+            f"      <li><strong>Location:</strong> " f"{locations[0].title()}</li>\n"
+        )
+
+    if "type" in characteristics:
+        output += (
+            f"      <li><strong>Type:</strong> "
+            f'{characteristics["type"].title()}</li>\n'
+        )
+
+    if lifespan:
+        output += f"      <li><strong>Lifespan:</strong> " f"{lifespan}</li>\n"
+
+    output += "    </ul>\n"
+    output += "  </div>\n"
+    output += "</li>\n"
 
     return output
 
