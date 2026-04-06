@@ -20,6 +20,27 @@ def write_html_file(file_path, content):
         return None
 
 
+def serialize_animal(animal_obj):
+    output = ""
+    name = animal_obj.get("name", "Unknown")  # name is compulsory
+    characteristics = animal_obj.get("characteristics", {})
+    locations = animal_obj.get("locations", [])
+
+    output += f'<li class="cards__item">\n'
+    output += f'<div class="card__title">{name}</div>\n'
+    output += f'<p class="card__text">\n'
+    if "diet" in characteristics:
+        output += f"<strong>Diet:</strong> {characteristics['diet']}<br/>\n"
+    if locations:
+        output += f"<strong>Location:</strong> {locations[0]}<br/>\n"
+    if "type" in characteristics:
+        output += f"<strong>Type:</strong> {characteristics['type']}<br/>\n"
+    output += f"</p>\n"
+    output += f"</li>\n"
+
+    return output
+
+
 def main():
     """Main function"""
 
@@ -28,23 +49,8 @@ def main():
     result_html_file_path = "animals.html"
 
     output = f'<ul class="cards">\n'
-
-    for animal in animals_data:
-        name = animal.get("name", "Unknown")  # name is compulsory
-        characteristics = animal.get("characteristics", {})
-        locations = animal.get("locations", [])
-
-        output += f'<li class="cards__item">\n'
-        output += f'<div class="card__title">{name}</div>\n'
-        output += f'<p class="card__text">\n'
-        if "diet" in characteristics:
-            output += f"<strong>Diet:</strong> {characteristics['diet']}<br/>\n"
-        if locations:
-            output += f"<strong>Location:</strong> {locations[0]}<br/>\n"
-        if "type" in characteristics:
-            output += f"<strong>Type:</strong> {characteristics['type']}<br/>\n"
-        output += f"</p>\n"
-        output += f"</li>\n"
+    for animal_obj in animals_data:
+        output += serialize_animal(animal_obj)
     output += f"</ul>"
 
     html_result = html_template.replace("__REPLACE_ANIMALS_INFO__", output)
