@@ -25,16 +25,20 @@ def serialize_animal(animal_obj):
     name = animal_obj.get("name", "Unknown")  # name is compulsory
     characteristics = animal_obj.get("characteristics", {})
     locations = animal_obj.get("locations", [])
+    lifespan = animal_obj.get("lifespan", "Unknown")
 
     output += f'<li class="cards__item">\n'
-    output += f'<div class="card__title">{name}</div>\n'
+    output += f'<div class="card__title">{name.title()}</div>\n'  # .title() here for unity, but built for m -> Mammal
     output += f'<p class="card__text">\n'
     if "diet" in characteristics:
-        output += f"<strong>Diet:</strong> {characteristics['diet']}<br/>\n"
+        output += f'<strong>Diet:</strong> {characteristics["diet"].title()}<br/>\n'
     if locations:
-        output += f"<strong>Location:</strong> {locations[0]}<br/>\n"
+        output += f"<strong>Location:</strong> {locations[0].title()}<br/>\n"
     if "type" in characteristics:
-        output += f"<strong>Type:</strong> {characteristics['type']}<br/>\n"
+        output += f'<strong>Type:</strong> {characteristics["type"].title()}<br/>\n'
+    if "lifespan" in characteristics:
+        output += f'<strong>Lifespan:</strong> {characteristics["lifespan"]}<br/>\n'  # deliberately no .title()
+
     output += f"</p>\n"
     output += f"</li>\n"
 
