@@ -11,24 +11,19 @@ def main():
     """Main function"""
 
     animals_data = load_data("animals_data.json")
-    print(animals_data)
 
     for animal in animals_data:
-        name = animal.get("name", "Unknown")
-
+        name = animal.get("name", "Unknown")  # name is compulsory
         characteristics = animal.get("characteristics", {})
-        diet = characteristics.get("diet", "Unknown")
-        type_of_animal = characteristics.get("type", "Unknown")
-
         locations = animal.get("locations", [])
-        if locations:
-            first_location = locations[0]
-        else:
-            first_location = "Unknown"
 
-        print(
-            f"\nName: {name}\nDiet: {diet}\nLocation: {first_location}\nType: {type_of_animal}"
-        )
+        print(f"\nName: {name}")
+        if "diet" in characteristics:
+            print(f"Diet: {characteristics['diet']}")
+        if "type" in characteristics:
+            print(f"Type: {characteristics['type']}")
+        if locations:
+            print(f"Location: {locations[0]}")
 
 
 if __name__ == "__main__":
