@@ -3,7 +3,7 @@ import json
 
 def load_data(file_path):
     """Loads a JSON file"""
-    with open(file_path, "r") as json_file:
+    with open(file_path, "r", encoding="utf-8-sig") as json_file:
         return json.load(json_file)
 
 
@@ -15,7 +15,7 @@ def load_template(file_path):
 
 def write_html_file(file_path, content):
     """Creates and fills an HTML file with text"""
-    with open(file_path, "w", encoding="utf-8") as result_html_file:
+    with open(file_path, "w", encoding="utf-8-sig") as result_html_file:
         result_html_file.write(content)
         return None
 
@@ -27,25 +27,24 @@ def main():
     html_template = load_template("animals_template.html")
     result_html_file_path = "animals.html"
 
-    output = ""  # define an empty string
-    output += f'<ul class="cards">'
+    output = f'<ul class="cards">\n'
 
     for animal in animals_data:
         name = animal.get("name", "Unknown")  # name is compulsory
         characteristics = animal.get("characteristics", {})
         locations = animal.get("locations", [])
 
-        output += f'<li class="cards__item">'
-
-        output += f"Name: {name}<br/>"
+        output += f'<li class="cards__item">\n'
+        output += f'<div class="card__title">{name}</div>\n'
+        output += f'<p class="card__text">\n'
         if "diet" in characteristics:
-            output += f"Diet: {characteristics['diet']}<br/>"
-        if "type" in characteristics:
-            output += f"Type: {characteristics['type']}<br/>"
+            output += f"<strong>Diet:</strong> {characteristics['diet']}<br/>\n"
         if locations:
-            output += f"Location: {locations[0]}<br/>"
-
-        output += f"</li>"
+            output += f"<strong>Location:</strong> {locations[0]}<br/>\n"
+        if "type" in characteristics:
+            output += f"<strong>Type:</strong> {characteristics['type']}<br/>\n"
+        output += f"</p>\n"
+        output += f"</li>\n"
     output += f"</ul>"
 
     html_result = html_template.replace("__REPLACE_ANIMALS_INFO__", output)
