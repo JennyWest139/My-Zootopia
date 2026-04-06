@@ -28,18 +28,25 @@ def main():
     result_html_file_path = "animals.html"
 
     output = ""  # define an empty string
+    output += f'<ul class="cards">'
+
     for animal in animals_data:
         name = animal.get("name", "Unknown")  # name is compulsory
         characteristics = animal.get("characteristics", {})
         locations = animal.get("locations", [])
 
-        output += f"\nName: {name}\n"
+        output += f'<li class="cards__item">'
+
+        output += f"Name: {name}<br/>"
         if "diet" in characteristics:
-            output += f"Diet: {characteristics['diet']}\n"
+            output += f"Diet: {characteristics['diet']}<br/>"
         if "type" in characteristics:
-            output += f"Type: {characteristics['type']}\n"
+            output += f"Type: {characteristics['type']}<br/>"
         if locations:
-            output += f"Location: {locations[0]}\n"
+            output += f"Location: {locations[0]}<br/>"
+
+        output += f"</li>"
+    output += f"</ul>"
 
     html_result = html_template.replace("__REPLACE_ANIMALS_INFO__", output)
     write_html_file(result_html_file_path, html_result)
