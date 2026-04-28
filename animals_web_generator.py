@@ -110,7 +110,15 @@ def main():
     """Main function"""
 
     # animals_data = load_data("animals_data.json")
-    animals_data = load_data_from_api("Fox")
+    # animals_data = load_data_from_api("Fox")
+
+    animal_name = input("Enter a name of an animal: ").strip()
+    animals_data = load_data_from_api(animal_name)
+
+    if not animals_data:
+        print(f"No animals found for '{animal_name}'.")
+        return
+
     html_template = load_template("animals_template.html")
     result_html_file_path = "animals.html"
 
