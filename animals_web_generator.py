@@ -116,7 +116,17 @@ def main():
     animals_data = load_data_from_api(animal_name)
 
     if not animals_data:
-        print(f"No animals found for '{animal_name}'.")
+        error_html = (
+            f'<h2 style="text-align:center; color:#444;">'
+            f'The animal "{animal_name}" doesn\'t exist.'
+            f"</h2>"
+        )
+
+        html_template = load_template("animals_template.html")
+        html_result = html_template.replace("__REPLACE_ANIMALS_INFO__", error_html)
+        write_html_file("animals.html", html_result)
+
+        print("Website was still successfully generated to the file animals.html.")
         return
 
     html_template = load_template("animals_template.html")
