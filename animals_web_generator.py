@@ -48,46 +48,40 @@ def serialize_animal(animal_obj):
     extra_class = " unknown-skin" if not skin_type else ""
 
     locations = animal_obj.get("locations", [])
-    lifespan = animal_obj.get("lifespan", "Unknown")
 
     output += f'<li class="cards__item{extra_class}">\n'
-    output += f'  <div class="card__title">{name.title()}</div>\n'
-    output += '  <div class="card__text">\n'
-    output += '    <ul class="animal__details">\n'
+    output += f'<div class="card__title">{name.title()}</div>\n'
+    output += '<div class="card__text">\n'
+    output += '<ul class="animal__details">\n'
 
     if "diet" in characteristics:
         output += (
-            f"      <li><strong>Diet:</strong> "
-            f'{characteristics["diet"].title()}</li>\n'
+            f"<li><strong>Diet:</strong>" f'{characteristics["diet"].title()}</li>\n'
         )
 
     if locations:
-        output += (
-            f"      <li><strong>Location:</strong> " f"{locations[0].title()}</li>\n"
-        )
+        output += f"<li><strong>Location:</strong> " f"{locations[0].title()}</li>\n"
 
     if "type" in characteristics:
         output += (
-            f"      <li><strong>Type:</strong> "
-            f'{characteristics["type"].title()}</li>\n'
+            f"<li><strong>Type:</strong> " f'{characteristics["type"].title()}</li>\n'
         )
 
     if "lifespan" in characteristics:
         output += (
-            f"      <li><strong>Lifespan:</strong> "
-            f'{characteristics["lifespan"]}</li>\n'
+            f"<li><strong>Lifespan:</strong> " f'{characteristics["lifespan"]}</li>\n'
         )  # deliberately no .title()
 
     if skin_type:
-        output += f"      <li><strong>Skin type:</strong> {skin_type.title()}</li>\n"
+        output += f"<li><strong>Skin type:</strong> {skin_type.title()}</li>\n"
     else:  # tested by deleting one skin in json
         output += (
-            "      <li><strong>Skin type:</strong> "
+            "<li><strong>Skin type:</strong>"
             '<span class="skin-unknown">Unknown</span></li>\n'
         )
 
-    output += "    </ul>\n"
-    output += "  </div>\n"
+    output += "</ul>\n"
+    output += "</div>\n"
     output += "</li>\n"
 
     return output
@@ -108,9 +102,6 @@ def get_available_skin_types(animals_data):
 
 def main():
     """Main function"""
-
-    # animals_data = load_data("animals_data.json")
-    # animals_data = load_data_from_api("Fox")
 
     animal_name = input("Enter a name of an animal: ").strip()
     animals_data = load_data_from_api(animal_name)
