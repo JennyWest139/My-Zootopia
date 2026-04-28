@@ -1,5 +1,23 @@
 import json
 
+import requests
+
+from API_KEYS import API_NINJAS_API_KEY
+
+
+def load_data_from_api(animal_name):
+    """Fetch animal data from API by name"""
+    api_url = "https://api.api-ninjas.com/v1/animals"
+
+    headers = {"X-Api-Key": API_NINJAS_API_KEY}
+
+    params = {"name": animal_name}
+
+    response = requests.get(api_url, headers=headers, params=params)
+    response.raise_for_status()  # wichtig für sauberes Fehlerhandling
+
+    return response.json()
+
 
 def load_data(file_path):
     """Loads a JSON file"""
@@ -91,7 +109,8 @@ def get_available_skin_types(animals_data):
 def main():
     """Main function"""
 
-    animals_data = load_data("animals_data.json")
+    # animals_data = load_data("animals_data.json")
+    animals_data = load_data_from_api("Fox")
     html_template = load_template("animals_template.html")
     result_html_file_path = "animals.html"
 
